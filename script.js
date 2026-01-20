@@ -34,25 +34,65 @@ window.adjustInput = function (id, delta) {
     const el = document.getElementById(id);
     if (!el) return;
 
-    let currentVal = parseFloat(el.value);
+    const year = id.split('-')[1];
 
-    // If empty, resolve default from ID logic
-    if (isNaN(currentVal)) {
-        const defaults = {
-            'growth-2026': 8,
-            'growth-2027': 12,
-            'growth-2028': 12,
-            'growth-2029': 5
-        };
-        currentVal = defaults[id] || 0;
+    // Defaults matching current approved logic
+    const defaults = {
+        'growth-2026': 5.0,
+        'growth-2027': 9.5,
+        'growth-2028': 8.5,
+        'growth-2029': 6.0
+    };
+
+    let currentVal;
+
+    if (!el.value) {
+        currentVal = defaults[id];
+    } else {
+        // Parse "2026: +5.0 %" -> 5.0
+        // Split by colon, take second part
+        const parts = el.value.split(':');
+        if (parts.length > 1) {
+            currentVal = parseFloat(parts[1].replace('%', '').trim());
+        } else {
+            // Fallback if format is broken
+            currentVal = parseFloat(el.value);
+        }
     }
+
+    if (isNaN(currentVal)) currentVal = defaults[id];
 
     const newVal = currentVal + delta;
     // Round to 1 decimal place
-    el.value = Math.round(newVal * 10) / 10;
+    const roundedVal = Math.round(newVal * 10) / 10;
+
+    // Format: "2026: +5.0 %"
+    const sign = roundedVal > 0 ? '+' : '';
+    el.value = `${year}: ${sign}${roundedVal.toFixed(1)} %`;
 
     // Trigger update
     el.dispatchEvent(new Event('input'));
+}
+
+window.resetGrowthDefaults = function () {
+    const defaults = {
+        'growth-2026': 5.0,
+        'growth-2027': 9.5,
+        'growth-2028': 8.5,
+        'growth-2029': 6.0
+    };
+
+    for (const [id, val] of Object.entries(defaults)) {
+        const el = document.getElementById(id);
+        if (el) {
+            const year = id.split('-')[1];
+            const sign = val > 0 ? '+' : '';
+            el.value = `${year}: ${sign}${val.toFixed(1)} %`;
+        }
+    }
+
+    // Update the model (all inputs at once)
+    updateGrowthModel();
 }
 
 // ... (lines 16-124 skipped)
@@ -240,15 +280,43 @@ function updateGrowthModel() {
     const q29 = calculateQuarterlyIndices(2029, lastIndex, rates[2029]);
     growthData["2029-1"] = q29[0]; growthData["2029-2"] = q29[1]; growthData["2029-3"] = q29[2]; growthData["2029-4"] = q29[3];
 
-    // Refresh UI
+    // Refresh UI without full re-render (prevents blinking)
     console.log("Updated Growth Model:", growthData);
-    init(); // Re-render markers with new ROI
+    updateMarkerValues();
+}
 
-    // If side panel is open for a project, refresh it? 
-    // Simplified: init() redraws markers. If user clicks again, they see new data. 
-    // Ideally we should refresh the open panel too but user didn't explicitly ask for complex state sync.
-    // However, init() clears markers which might "disconnect" the open panel visually if we relied on marker refs.
-    // But openModal is separate.
+function updateMarkerValues() {
+    if (!window.bubbleElements) return;
+
+    window.bubbleElements.forEach(el => {
+        const name = el.dataset.projectName;
+        // Note: projects is imported at top.
+        const project = projects.find(p => p.name === name);
+        if (!project) return;
+
+        // Calculate new values
+        const avgPrice = parsePrice(project.price_from);
+        const completionSource = project.completion_text || project.description;
+        const completion = getCompletionDate(completionSource);
+        const estimatedGain = calculateROI(avgPrice, completion.key);
+        const gainFormatted = formatCurrency(estimatedGain);
+
+        const roiPercent = avgPrice > 0 ? (estimatedGain / avgPrice) * 100 : 0;
+        const isHighReturn = roiPercent >= 15;
+
+        // Update DOM
+        const footer = el.querySelector('.bubble-footer');
+        const label = el.querySelector('.roi-label');
+
+        if (footer) {
+            if (isHighReturn) footer.classList.add('high-return');
+            else footer.classList.remove('high-return');
+        }
+
+        if (label) {
+            label.innerHTML = `🖩 +${gainFormatted}`;
+        }
+    });
 }
 
 // Bind Inputs
@@ -259,6 +327,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     // Initial Calc
     updateGrowthModel();
+
+    // Shake Animation Schedule
+    // "5 sekunder etter load, så hvert 5e sekund 3x" -> Total ~4 shakes? Or 3?
+    // Let's do T=5, T=10, T=15, T=20 (Initial + 3 repeats)
+    const shakeBox = document.querySelector('.growth-controls');
+    if (shakeBox) {
+        let shakeCount = 0;
+        const maxShakes = 4;
+
+        const triggerShake = () => {
+            if (shakeCount >= maxShakes) return;
+
+            shakeBox.classList.add('shake-anim');
+            // Remove class after animation (0.8s) to allow re-trigger
+            setTimeout(() => {
+                shakeBox.classList.remove('shake-anim');
+                shakeCount++;
+
+                if (shakeCount < maxShakes) {
+                    setTimeout(triggerShake, 5000); // 5s interval
+                }
+            }, 1000);
+        };
+
+        // First shake after 5s
+        setTimeout(triggerShake, 5000);
+    }
 });
 
 function parsePrice(priceStr) {
@@ -428,6 +523,7 @@ function createCloud(project) {
     // Create a CONTAINER for the marker
     const markerContainer = document.createElement('div');
     markerContainer.className = 'marker-container';
+    markerContainer.dataset.projectName = project.name; // Store name for updates
 
     // Remove direct centering styles - rely on CSS Flexbox/Block in .marker-container
     el.style.position = '';
@@ -475,13 +571,15 @@ function createCloud(project) {
 
 
 
-// Z-Index Cycling Logic
+// Z-Index Cycling Logic - Disabled to prevent flickering
+/*
 setInterval(() => {
     if (!window.bubbleElements) return;
     window.bubbleElements.forEach(container => {
         container.style.zIndex = 100 + Math.floor(Math.random() * 100);
     });
 }, 2000);
+*/
 
 // Helper to generate stats HTML for a single project (or sub-project)
 function generateStatsHTML(p, index = null) {

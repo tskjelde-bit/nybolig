@@ -79,6 +79,13 @@
                             <line x1="12" y1="8" x2="12.01" y2="8"></line>
                         </svg>
                     </div>
+                    <div class="reset-icon" onclick="resetGrowthDefaults()" title="Tilbakestill til standard">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M23 4v6h-6"></path>
+                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                        </svg>
+                    </div>
                     <div id="seasonal-info" class="hidden"
                         style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 280px; background: #ffffff; color: #162233; padding: 16px; border-radius: 12px; font-size: 0.9rem; text-transform: none; text-align: left; margin-bottom: 32px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); z-index: 100;">
                         <div onclick="this.parentElement.classList.add('hidden')"
@@ -116,7 +123,7 @@
                 <div class="growth-row">
                     <!-- 2026 -->
                     <div class="input-wrapper">
-                        <input type="number" id="growth-2026" placeholder="2026: +5.0 %" step="0.5">
+                        <input type="text" id="growth-2026" placeholder="2026: +5.0 %" readonly>
                         <div class="custom-spinners">
                             <button class="spin-btn up" onclick="adjustInput('growth-2026', 0.5)">
                                 <svg width="8" height="5" viewBox="0 0 10 6" fill="none">
@@ -135,7 +142,7 @@
 
                     <!-- 2027 -->
                     <div class="input-wrapper">
-                        <input type="number" id="growth-2027" placeholder="2027: +9.5 %" step="0.5">
+                        <input type="text" id="growth-2027" placeholder="2027: +9.5 %" readonly>
                         <div class="custom-spinners">
                             <button class="spin-btn up" onclick="adjustInput('growth-2027', 0.5)">
                                 <svg width="8" height="5" viewBox="0 0 10 6" fill="none">
@@ -154,7 +161,7 @@
 
                     <!-- 2028 -->
                     <div class="input-wrapper">
-                        <input type="number" id="growth-2028" placeholder="2028: +8.5 %" step="0.5">
+                        <input type="text" id="growth-2028" placeholder="2028: +8.5 %" readonly>
                         <div class="custom-spinners">
                             <button class="spin-btn up" onclick="adjustInput('growth-2028', 0.5)">
                                 <svg width="8" height="5" viewBox="0 0 10 6" fill="none">
@@ -173,7 +180,7 @@
 
                     <!-- 2029 -->
                     <div class="input-wrapper">
-                        <input type="number" id="growth-2029" placeholder="2029: +6.0 %" step="0.5">
+                        <input type="text" id="growth-2029" placeholder="2029: +6.0 %" readonly>
                         <div class="custom-spinners">
                             <button class="spin-btn up" onclick="adjustInput('growth-2029', 0.5)">
                                 <svg width="8" height="5" viewBox="0 0 10 6" fill="none">
@@ -244,7 +251,7 @@
         </div>
     </div>
 
-    <script type="module" src="script.js?v=160"></script>
+    <script type="module" src="script.js?v=170"></script>
 </body>
 
 </html>
