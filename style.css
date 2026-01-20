@@ -498,7 +498,8 @@ body {
     -moz-appearance: textfield;
 }
 
-.growth-row input {
+/* Input styled div for multi-color text */
+.growth-input-div {
     width: 100%;
     /* Fill wrapper */
     padding: 8px 32px 8px 12px;
@@ -508,24 +509,19 @@ body {
     font-family: 'Outfit', sans-serif;
     font-size: 0.85rem;
     font-weight: 700;
-    color: #1e293b;
-    /* Dark text */
     background: #ffffff;
     /* White bg */
-    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: default;
+    height: 38px;
 }
 
-.growth-row input:focus {
-    outline: none;
-    border-color: #3b82f6;
-    background: #ffffff;
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
-}
-
-.growth-row input::placeholder {
-    color: #94a3b8;
-    /* Muted placeholder */
-    font-size: 0.8rem;
+/* Old Input Styles (Validation/Fallback) */
+.growth-row input {
+    display: none;
+    /* Hide old inputs if any remain */
 }
 
 /* Custom Spinner Buttons */

@@ -30,13 +30,31 @@ map.addControl(new mapboxgl.NavigationControl({
 }), 'top-right');
 
 // Helper for Custom Spinners
-window.adjustInput = function (id, delta) {
+// Helper for setting value
+function setGrowthDisplay(id, val) {
     const el = document.getElementById(id);
     if (!el) return;
 
     const year = id.split('-')[1];
+    const rounded = Math.round(val * 10) / 10;
+    const sign = rounded > 0 ? '+' : '';
 
-    // Defaults matching current approved logic
+    // Store numeric value for easy read
+    el.dataset.value = rounded;
+
+    // HTML with coloring
+    // Year: Dark (#1e293b), Value: Strong Green (#16a34a)
+    el.innerHTML = `<span style="color: #1e293b;">${year}:</span> <span style="color: #16a34a;">${sign}${rounded.toFixed(1)} %</span>`;
+
+    // Trigger update
+    updateGrowthModel();
+}
+
+window.adjustInput = function (id, delta) {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    // Defaults
     const defaults = {
         'growth-2026': 5.0,
         'growth-2027': 9.5,
@@ -46,32 +64,17 @@ window.adjustInput = function (id, delta) {
 
     let currentVal;
 
-    if (!el.value) {
-        currentVal = defaults[id];
+    if (el.dataset.value !== undefined) {
+        currentVal = parseFloat(el.dataset.value);
     } else {
-        // Parse "2026: +5.0 %" -> 5.0
-        // Split by colon, take second part
-        const parts = el.value.split(':');
-        if (parts.length > 1) {
-            currentVal = parseFloat(parts[1].replace('%', '').trim());
-        } else {
-            // Fallback if format is broken
-            currentVal = parseFloat(el.value);
-        }
+        // Fallback or Initial state
+        currentVal = defaults[id];
     }
 
     if (isNaN(currentVal)) currentVal = defaults[id];
 
     const newVal = currentVal + delta;
-    // Round to 1 decimal place
-    const roundedVal = Math.round(newVal * 10) / 10;
-
-    // Format: "2026: +5.0 %"
-    const sign = roundedVal > 0 ? '+' : '';
-    el.value = `${year}: ${sign}${roundedVal.toFixed(1)} %`;
-
-    // Trigger update
-    el.dispatchEvent(new Event('input'));
+    setGrowthDisplay(id, newVal);
 }
 
 window.resetGrowthDefaults = function () {
@@ -83,19 +86,9 @@ window.resetGrowthDefaults = function () {
     };
 
     for (const [id, val] of Object.entries(defaults)) {
-        const el = document.getElementById(id);
-        if (el) {
-            const year = id.split('-')[1];
-            const sign = val > 0 ? '+' : '';
-            el.value = `${year}: ${sign}${val.toFixed(1)} %`;
-        }
+        setGrowthDisplay(id, val);
     }
-
-    // Update the model (all inputs at once)
-    updateGrowthModel();
 }
-
-// ... (lines 16-124 skipped)
 
 // Configuration for bubbles
 const MIN_SIZE = 110;
@@ -252,8 +245,36 @@ function updateGrowthModel() {
 
     [2026, 2027, 2028, 2029].forEach(y => {
         const el = document.getElementById(`growth-${y}`);
-        let val = parseFloat(el.value);
-        if (isNaN(val)) val = defs[y]; // Fallback to default
+        let val = NaN;
+
+        if (el) {
+            // Priority 1: Data attribute (new system)
+            if (el.dataset.value !== undefined) {
+                val = parseFloat(el.dataset.value);
+            }
+            // Priority 2: Input value (fallback)
+            else if (el.value) {
+                const parts = el.value.split(':');
+                if (parts.length > 1) {
+                    val = parseFloat(parts[1].replace('%', '').trim());
+                } else {
+                    val = parseFloat(el.value);
+                }
+            }
+            // Priority 3: Parse Text Content (div without data-value)
+            else if (el.textContent) {
+                const parts = el.textContent.split(':');
+                if (parts.length > 1) {
+                    val = parseFloat(parts[1].replace('%', '').trim());
+                }
+            }
+        }
+
+        if (isNaN(val)) {
+            val = defs[y];
+            // Self-heal: Update display to default if missing
+            // if (el && !el.dataset.value) setGrowthDisplay(`growth-${y}`, val); // Careful with recursion/undef
+        }
         rates[y] = val;
     });
 
@@ -325,8 +346,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const el = document.getElementById(`growth-${y}`);
         if (el) el.addEventListener('input', updateGrowthModel);
     });
-    // Initial Calc
-    updateGrowthModel();
+    // Initialize displays with defaults
+    resetGrowthDefaults();
+
+    // Initial Calc (called by resetGrowthDefaults, but safe to call again)
+    // updateGrowthModel(); 
 
     // Shake Animation Schedule
     // "5 sekunder etter load, så hvert 5e sekund 3x" -> Total ~4 shakes? Or 3?
