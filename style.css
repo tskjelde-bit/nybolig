@@ -44,8 +44,10 @@ body {
 .floating-nav {
     position: relative;
     z-index: 1000;
-    background-color: #f3f4f6;
-    /* Off-white background like reference */
+    /* background-color: #f3f4f6; - Replaced with gradient */
+    background: linear-gradient(90deg, rgba(243, 244, 246, 1) 20%, rgba(243, 244, 246, 0.5) 100%);
+    backdrop-filter: blur(10px);
+    /* Enhance glass effect */
     width: calc(100% - 48px);
     /* Full width matching frame margins */
     /* Full width matching frame margins */
@@ -138,8 +140,8 @@ body {
 .side-panel {
     flex: 1;
     /* 33% width roughly */
-    background-color: rgba(0, 0, 0, 0.5);
-    /* Black with 0.5 opacity */
+    /* background-color: rgba(0, 0, 0, 0.5); - Replaced with gradient */
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%);
     border-radius: 32px;
     min-width: 300px;
     /* Minimum reasonable width */
@@ -442,6 +444,19 @@ body {
     gap: 8px;
     width: auto;
     /* Hug content */
+}
+
+/* Info Icon */
+.info-icon {
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.info-icon:hover {
+    opacity: 1;
 }
 
 /* Custom Spinners Layout */
@@ -1313,4 +1328,8 @@ body {
 .mapboxgl-ctrl-top-right {
     top: 24px !important;
     right: 24px !important;
+}
+
+.hidden {
+    display: none !important;
 }

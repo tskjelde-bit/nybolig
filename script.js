@@ -515,7 +515,38 @@ function generateStatsHTML(p, index = null) {
                 <span class="value">Q${completion.quarter} ${completion.year}</span>
             </div>
             <div class="stat-item" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; margin-top: 8px; grid-column: 1 / -1; display:flex; flex-direction: column; align-items: center; text-align: center;">
-                 <span class="label" style="color: white; font-weight: 700; font-size: 1.1rem;">FORVENTET <span style="font-weight: 400; text-transform: none;">(netto)</span> AVKASTNING</span>
+                 <div style="display: flex; align-items: center; justify-content: center; gap: 8px; position: relative;">
+                     <span class="label" style="color: white; font-weight: 700; font-size: 1.1rem;">FORVENTET <span style="font-weight: 400; text-transform: none;">(netto)</span> AVKASTNING</span>
+                     <div class="info-icon" onclick="this.nextElementSibling.classList.toggle('hidden')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                     </div>
+                     <div class="hidden" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 280px; background: #ffffff; color: #162233; padding: 16px; border-radius: 12px; font-size: 0.9rem; text-transform: none; text-align: left; margin-bottom: 32px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); z-index: 1000; pointer-events: auto; cursor: default;">
+                         <div onclick="this.parentElement.classList.add('hidden')" style="position: absolute; top: 12px; right: 12px; cursor: pointer; opacity: 0.5; padding: 4px;">
+                             <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                 <line x1="1" y1="1" x2="13" y2="13"></line>
+                                 <line x1="1" y1="13" x2="13" y2="1"></line>
+                             </svg>
+                         </div>
+                         <h4 style="margin: 0 0 8px 0; font-size: 1.05rem; color: #162233; font-weight: 700; padding-right: 16px;">Slik vektes årsveksten på sesonger</h4>
+                         <p style="margin: 0 0 12px 0; color: #162233; line-height: 1.4;">
+                            <span style="color: #3b82f6; font-weight: 700;">Sesongmønsteret er front‑lastet:</span> Den årlige prisutviklingen fordeles ulikt på kvartalene for å speile historiske mønstre i Oslo‑markedet.
+                         </p>
+                         <p style="margin: 0 0 4px 0; font-weight: 600; color: #162233;">Vektene som brukes er faste:</p>
+                         <ul style="margin: 0 0 12px 0; padding-left: 16px; color: #162233; display: grid; grid-template-columns: 1fr 1fr; gap: 4px;">
+                             <li>Q1: 45%</li>
+                             <li>Q2: 27,5%</li>
+                             <li>Q3: 19,5%</li>
+                             <li>Q4: 8%</li>
+                         </ul>
+                         <p style="margin: 0; color: #475569; font-size: 0.85rem; line-height: 1.3;">
+                            <strong>Komponert beregning:</strong> Hver kvartalsvekst beregnes slik at sammensatt effekt av alle fire kvartaler alltid gir nøyaktig den årlige prosenten du har angitt.
+                         </p>
+                     </div>
+                 </div>
                  <span style="color: #94a3b8; font-size: 0.95rem; font-weight: 400; text-transform: none; margin-top: 4px;">(basert på <span style="color: #3b82f6; font-weight: 700;">${(growthData[completion.key] - 100).toFixed(1).replace('.', ',')}%</span> prisvekst)</span>
                  <span class="value" style="color: #4ecb8d; font-size: 1.6rem; margin-top: 8px; font-weight: 700;">+${formatCurrency(estimatedGain)} / ${roiPercentFormatted}%</span>
             </div>
@@ -555,7 +586,7 @@ function openModal(project) {
         // Generate HTML
         panel.innerHTML = `
             <div class="side-panel-content">
-                <span class="area-tag">${project.area || "Oslo"}</span>
+                <!-- <span class="area-tag">${project.area || "Oslo"}</span> -->
                 <h2>${project.name}</h2>
                 <img src="${imgSrc}" alt="${project.name}" onerror="this.onerror=null;this.src='${fallbackImg}';" />
 
@@ -576,7 +607,7 @@ function openModal(project) {
         const modalOverlay = document.getElementById('modal-overlay');
 
         mTitle.textContent = project.name;
-        mArea.textContent = project.area || "Oslo";
+        // mArea.textContent = project.area || "Oslo"; // Hidden per request
 
         mImage.src = imgSrc;
         mImage.onerror = function () { this.src = fallbackImg; };
