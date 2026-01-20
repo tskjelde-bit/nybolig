@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nye Boligprosjekter Oslo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src='https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Video Background -->
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="background_video.webm" type="video/webm">
+    </video>
+
+    <!-- Floating Navigation -->
+    <nav class="floating-nav">
+        <div class="nav-logo">
+            <img src="logo_innsikt_wide.png" alt="Innsikt Nybygg Prosjekt">
+        </div>
+        <div class="nav-links">
+            <a href="#">Markedet</a>
+            <a href="#">Mine prosjekter</a>
+            <a href="#" class="contact-btn">Kontakt</a>
+        </div>
+    </nav>
+
+    <!-- Main Content Layout -->
+    <div class="content-container">
+        <!-- Main Map Frame -->
+        <main class="map-frame">
+            <div id="map"></div>
+
+            <!-- Map Controls -->
+            <!-- Map Controls -->
+            <!-- Controls Wrapper -->
+            <div class="controls-wrapper">
+
+                <!-- 1. Map Filters (White Box) -->
+                <div class="map-controls">
+                    <div class="control-group">
+                        <button id="filter-active" class="control-btn active" onclick="setFilter('active')">Til salgs
+                            nå</button>
+                        <button id="filter-sold" class="control-btn" onclick="setFilter('sold')">Sluttsolgt</button>
+                    </div>
+                    <div class="control-divider"></div>
+                    <div class="control-group">
+                        <button id="filter-year-all" class="control-btn active" onclick="setYearFilter('all')">Alle
+                            år</button>
+                        <button id="filter-2026" class="control-btn" onclick="setYearFilter(2026)">Ferdig 2026</button>
+                        <button id="filter-2027" class="control-btn" onclick="setYearFilter(2027)">Ferdig 2027</button>
+                        <button id="filter-2028" class="control-btn" onclick="setYearFilter(2028)">Ferdig 2028</button>
+                        <button id="filter-2029" class="control-btn" onclick="setYearFilter(2029)">2029...</button>
+                    </div>
+                </div>
+
+                <!-- 2. Price Growth Inputs (MOVED TO BOTTOM LEFT) -->
+                <!-- REMOVED FROM HERE -->
+            </div>
+
+            <!-- 2. Price Growth Inputs (White Box, Bottom Left) -->
+            <div class="growth-controls">
+                <div class="growth-header">Endre anslag prisutvikling</div>
+                <div class="growth-row">
+                    <!-- 2026 -->
+                    <div class="input-wrapper">
+                        <input type="number" id="growth-2026" placeholder="2026: +8 %" step="0.5">
+                        <div class="custom-spinners">
+                            <button class="spin-btn up" onclick="adjustInput('growth-2026', 0.5)">
+                                <svg width="8" height="5" viewBox="0 0 10 6" fill="none">
+                                    <path d="M1 5L5 1L9 5" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <button class="spin-btn down" onclick="adjustInput('growth-2026', -0.5)">
+                                <svg width="8" height="5" viewBox="0 0 10 6" fill="none">
+                                    <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 2027 -->
+                    <div class="input-wrapper">
+                        <input type="number" id="growth-2027" placeholder="2027: +12 %" step="0.5">
+                        <div class="custom-spinners">
+                            <button class="spin-btn up" onclick="adjustInput('growth-2027', 0.5)">
+                                <svg width="8" height="5" viewBox="0 0 10 6" fill="none">
+                                    <path d="M1 5L5 1L9 5" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <button class="spin-btn down" onclick="adjustInput('growth-2027', -0.5)">
+                                <svg width="8" height="5" viewBox="0 0 10 6" fill="none">
+                                    <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 2028 -->
+                    <div class="input-wrapper">
+                        <input type="number" id="growth-2028" placeholder="2028: +12 %" step="0.5">
+                        <div class="custom-spinners">
+                            <button class="spin-btn up" onclick="adjustInput('growth-2028', 0.5)">
+                                <svg width="8" height="5" viewBox="0 0 10 6" fill="none">
+                                    <path d="M1 5L5 1L9 5" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <button class="spin-btn down" onclick="adjustInput('growth-2028', -0.5)">
+                                <svg width="8" height="5" viewBox="0 0 10 6" fill="none">
+                                    <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 2029 -->
+                    <div class="input-wrapper">
+                        <input type="number" id="growth-2029" placeholder="2029: +5 %" step="0.5">
+                        <div class="custom-spinners">
+                            <button class="spin-btn up" onclick="adjustInput('growth-2029', 0.5)">
+                                <svg width="8" height="5" viewBox="0 0 10 6" fill="none">
+                                    <path d="M1 5L5 1L9 5" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <button class="spin-btn down" onclick="adjustInput('growth-2029', -0.5)">
+                                <svg width="8" height="5" viewBox="0 0 10 6" fill="none">
+                                    <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Right Side Panel -->
+        <aside class="side-panel" id="detail-panel">
+            <div class="empty-state">
+                <p>Velg et prosjekt i kartet for å se detaljer</p>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Fun Car Effect (Hidden for now but keeping structure) -->
+    <div id="car-rig" style="display: none;">
+        <div class="banner-string"></div>
+        <div class="banner">Espen Torbjørn Ali lag</div>
+        <div class="passengers">
+            <img src="ali_new.png" class="face face-1" alt="Ali">
+            <img src="torbjorn_new.jpg" class="face face-2" alt="Torbjørn">
+            <img src="espen_new.jpg" class="face face-3" alt="Espen">
+        </div>
+        <img src="red_car.png" class="car-body" alt="Rask bil">
+    </div>
+
+    <div id="modal-overlay" class="hidden">
+        <div id="project-modal">
+            <button id="close-modal" aria-label="Lukk">&times;</button>
+            <div class="modal-content">
+                <div class="modal-image-container">
+                    <img id="modal-image" src="" alt="Prosjekt bilde">
+                </div>
+                <div class="modal-details">
+                    <h2 id="modal-title">Prosjektnavn</h2>
+                    <p class="area-tag" id="modal-area">Område</p>
+                    <p id="modal-desc">Beskrivelse kommer her.</p>
+                    <div class="modal-stats">
+                        <!-- Stats Grid injected by JS -->
+                    </div>
+                    <div id="modal-actions" style="margin-top: 20px;">
+                        <!-- Buttons injected here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="script.js?v=105"></script>
+</body>
+
+</html>

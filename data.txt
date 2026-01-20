@@ -1,0 +1,35 @@
+Prosjekt	Trinn	Salgsstart	Enheter	Solgt	Oppdatert	Kommune	Snitt m2-pris	Snitt BRA	Utvikler	Megler	Snittpris	min. m2-pris	max. m2-pris	min.BRA	max.BRA	Boligtype	ID
+Åsjordet 3	Trinn 1	28.10.2025	19	9	29.12.2025	OSLO	145 955	96	Gjelsten Bolig	Nordvik Frogner	13 968 421	117 880	182 857	70	151,00	Leilighet	27818
+Fagerblom	Trinn 1	27.05.2025	82	52	29.12.2025	OSLO	153 954	70	AF Eiendom og Boligbyggelaget Usbl	Røisland & Co Eiendomsmegling AS	10 994 146	115 384	237 748	38	151,00	Leilighet	27583
+Fryd	Trinn 1	27.08.2025	62	42	29.12.2025	OSLO	135 823	58	Stor Oslo Eiendom	Røisland & Co Eiendomsmegling AS	7 858 064	108 870	170 454	20	126,00	Leilighet	27136
+Frysjatunet	Trinn 4	11.03.2025	26	12	29.12.2025	OSLO	115 389	80	OBOS Nye Hjem / Stor Oslo Eiendom	OBOS Eiendomsmeglere	9 340 400	97 752	133 333	40	114,00	Leilighet	27441
+Frysjatunet	Frysja X	30.09.2025	10	3	29.12.2025	OSLO	152 019	119	OBOS Nye Hjem / Stor Oslo Eiendom	OBOS Eiendomsmeglere	18 150 000	136 363	168 032	99	146,00	Leilighet	27716
+Furuset Village	Trinn 1	11.11.2025	16	2	05.01.2026	OSLO	92 960	60	OBOS	OBOS Eiendomsmeglere AS	5 399 333	82 098	108 333	36	81,00	Leilighet	27846
+Granstangen Park	Hus 13 og 14	08.05.2025	44	26	29.12.2025	OSLO	96 056	71	JM Norge AS	JM Norge Oslo	6 772 954	83 033	120 256	39	89,00	Leilighet	27553
+Granstangen Park	Hus 12	29.05.2025	27	8	29.12.2025	OSLO	99 850	57	JM Norge AS	JM Norge Oslo	5 497 407	81 373	117 692	39	85,00	Leilighet	27542
+Grønvollkvartalet	Trinn 3 - Fase 2	07.03.2025	70	45	29.12.2025	OSLO	118 200	71	Nordr	EiendomsMegler 1	8 292 214	100 485	150 975	41	125,00	Leilighet	27432
+Haslevangen	Trinn 1	05.05.2025	36	28	29.12.2025	OSLO	129 704	72	Moro AS	Røisland & Co Eiendomsmegling AS	9 431 944	105 468	181 159	40	138,00	Leilighet	27535
+Haslevangen	Trinn 2	24.06.2025	43	29	29.12.2025	OSLO	136 050	58	Moro AS	Røisland & Co Eiendomsmegling AS	7 775 000	109 375	165 714	35	96,00	Leilighet	27630
+Haslevangen	Trinn 3	11.11.2025	27	7	29.12.2025	OSLO	133 675	59	Moro AS	Røisland & Co Eiendomsmegling AS	7 863 461	109 836	165 306	36	98,00	Leilighet	27841
+Holtet Hage	Trinn 1	28.05.2025	13	13	29.12.2025	OSLO	176 785	94	Opsahl bolig AS	PRIVATmegleren Panorama	16 769 230	137 974	202 654	67	115,00	Leilighet	27589
+Kampenhagen	Trinn 1	13.02.2025	100	79	29.12.2025	OSLO	132 170	68	Scandinavian Property Group AS	Røisland & Co	9 095 200	94 722	224 719	39	139,00	Leilighet	27763
+Konows Hager	Trinn 1	06.05.2025	19	7	29.12.2025	OSLO	140 409	74	Oslo House AS	Røisland & Co Eiendomsmegling AS	10 613 157	116 101	160 606	35	102,00	Leilighet	27544
+Landingsveien 14	Trinn 1	28.03.2025	56	46	29.12.2025	OSLO	108 073	57	Attivo Eiendomsutvikling AS	EiendomsMegler 1	6 206 583	91 984	135 714	35	84,00	Leilighet	27671
+Lenschows	Trinn 1 - B	03.06.2025	70	45	29.12.2025	OSLO	141 217	64	Solon Eiendom AS	Sem & Johnsen	9 095 000	113 291	180 090	37	132,00	Leilighet	27569
+Lenschows	Trinn 2 - C	09.10.2025	42	15	29.12.2025	OSLO	136 168	62	Solon Eiendom AS	Sem & Johnsen	8 351 190	104 487	161 111	35	128,00	Leilighet	27745
+Libakkløkka	Trinn 1	27.04.2025	58	40	29.12.2025	OSLO	114 507	61	Neptune Properities AS	EiendomsMegler 1	6 815 344	82 417	151 428	35	91,00	Leilighet	27456
+Linderudløkka	Trinn 1	26.08.2025	71	52	29.12.2025	OSLO	105 058	58	Stor Oslo Eiendom	Røisland & Co	6 027 887	86 875	123 513	30	104,00	Leilighet	27695
+Linderudløkka	Trinn 2	28.10.2025	73	29	29.12.2025	OSLO	107 187	58	Stor Oslo Eiendom	Røisland & Co	6 073 972	85 465	130 000	30	112,00	Leilighet	27811
+Mariakvartalet	Trinn 4 - H og I	20.05.2025	38	11	29.12.2025	OSLO	190 172	72	Oslo S. Utvikling AS	Røisland & Co Eiendomsmegling AS	14 053 947	141 176	254 716	41	106,00	Leilighet	27656
+Oen	Trinn 1	05.06.2025	46	23	29.12.2025	OSLO	99 203	66	OBOS Nye Hjem AS	OBOS Eiendomsmeglere AS	6 332 608	77 976	115 384	37	106,00	Leilighet	27566
+Oen	Trinn 2	08.10.2025	49	6	29.12.2025	OSLO	95 479	87	OBOS Nye Hjem AS	OBOS Nye Hjem AS	8 163 541	70 535	124 218	45	137,00	Leilighet	27730
+Over Torshov	Over Torshov	15.02.2025	35	28	29.12.2025	OSLO	127 172	58	Varde / Rondeslott/ Bjerke Eiendom	Røisland & Co Eiendomsmegling AS	7 561 470	93 333	162 500	47	100,00	Leilighet	27177
+Staffeldts gate 2	Trinn 1	15.05.2025	38	34	29.12.2025	OSLO	169 211	46	Normisjon / Oslo House AS	PRIVATmegleren Nyeboliger AS	7 818 055	142 500	191 304	33	94,00	Leilighet	27533
+Stovner Torg	Trinn 1	12.11.2025	88	51	29.12.2025	OSLO	108 511	46	SPG	Sem & Johnsen	4 790 397	80 707	161 904	21	99,00	Leilighet	27849
+Ullernhøyden	Trinn 1	11.06.2025	30	16	29.12.2025	OSLO	148 367	71	Axer Bolig AS	Sem & Johnsen	10 781 666	120 270	206 603	40	130,00	Leilighet	27592
+Ulvenplassen	Humleblom Borettslag	05.02.2025	73	45	05.01.2026	OSLO	99 336	68	OBOS Nye Hjem AS	OBOS BBL	6 573 972	73 846	123 750	40	130,00	Leilighet	27363
+Ulvenplassen	Søtkirsebæret Boretttslag	25.03.2025	62	11	29.12.2025	OSLO	113 851	57	OBOS Nye Hjem AS	OBOS BBL	6 451 612	96 428	126 744	43	84,00	Leilighet	27480
+Ulvenplassen	Humleblom Borettslag	14.05.2025	55	17	29.12.2025	OSLO	100 440	72	OBOS Nye Hjem AS	OBOS BBL	7 078 181	76 576	126 595	47	111,00	Leilighet	27524
+Ulvenplassen	Humleblom Borettslag	07.10.2025	56	14	29.12.2025	OSLO	100 141	75	OBOS Nye Hjem AS	OBOS BBL	7 231 250	78 761	126 744	42	113,00	Leilighet	27732
+Vesteråsveien Panorama	Trinn 1	16.06.2025	10	4	29.12.2025	OSLO	105 439	208	Atlas Eiendom AS	PrivatMegleren Allé	21 922 222	101 456	111 445	166	236,00	Leilighet	27614
+Villa Silur	Hus A-C	13.02.2025	53	34	29.12.2025	OSLO	141 066	74	Nåbo AS	PrivatMegleren Nyeboliger Oslo	10 763 207	103 448	198 412	43	130,00	Leilighet	27391

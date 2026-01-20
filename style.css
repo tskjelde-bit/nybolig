@@ -1,0 +1,1271 @@
+:root {
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-color: #38bdf8;
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --font-main: 'Outfit', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #000000;
+    /* Black background */
+    font-family: 'Outfit', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Background Video */
+#bg-video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+/* Floating Navigation */
+/* Floating Navigation */
+.floating-nav {
+    position: relative;
+    z-index: 1000;
+    background-color: #f3f4f6;
+    /* Off-white background like reference */
+    width: calc(100% - 48px);
+    /* Full width matching frame margins */
+    /* Full width matching frame margins */
+    max-width: 1100px;
+    height: 79px;
+    /* Updated to 79px */
+    margin-top: 24px;
+    border-radius: 16px;
+    /* Rounded corners, not pill */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+}
+
+.nav-logo img {
+    height: 55px;
+    /* Increased to 55px */
+    width: auto;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+.nav-links a:not(.contact-btn) {
+    text-decoration: none;
+    color: #1a1a1a;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.nav-links a:not(.contact-btn):hover {
+    color: #4ecb8d;
+}
+
+/* Contact Button - Primary Style (Black) */
+.nav-links .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1a1a1a;
+    color: white;
+    text-decoration: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    /* Slightly rounded */
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.nav-links .contact-btn:hover {
+    background-color: #000;
+    transform: translateY(-1px);
+}
+
+/* Main Content Layout */
+.content-container {
+    display: flex;
+    gap: 24px;
+    width: calc(100% - 48px);
+    max-width: 1600px;
+    height: calc(100vh - 120px);
+    /* Fill remaining height roughly */
+    margin: 24px;
+    flex-grow: 1;
+}
+
+/* Map Frame */
+.map-frame {
+    flex: 2;
+    /* 66% width roughly */
+    position: relative;
+    background-color: #f1f5f9;
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+    min-width: 0;
+    /* Fix flex overflow */
+}
+
+/* Side Panel */
+.side-panel {
+    flex: 1;
+    /* 33% width roughly */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Black with 0.5 opacity */
+    border-radius: 32px;
+    min-width: 300px;
+    /* Minimum reasonable width */
+    max-width: 450px;
+    /* Don't get too wide on huge screens */
+    backdrop-filter: blur(10px);
+    /* Optional: Adds nice glass effect consistent with controls */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Subtle border for definition */
+    overflow: hidden;
+    /* Ensure content doesn't spill corners */
+}
+
+/* Empty State */
+.empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Side Panel Content */
+.side-panel-content {
+    padding: 24px;
+    height: 100%;
+    overflow-y: auto;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.side-panel-content h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #ffffff;
+    /* Explicitly white */
+}
+
+.side-panel-content .area-tag {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    color: #cbd5e1;
+    align-self: flex-start;
+}
+
+.side-panel-content img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.side-panel-content .modal-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* Grid Item Styles for Detail Panel */
+.side-panel-content .stat-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.side-panel-content .stat-item .label {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    /* Light slate */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.side-panel-content .stat-item .value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+}
+
+
+.sub-project-title {
+    color: #cbd5e1;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    grid-column: 1 / -1;
+    /* Span full width in grid */
+}
+
+.modal-stats .stat-group {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.side-panel-content #modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: auto;
+    /* Push to bottom */
+    padding-top: 20px;
+}
+
+/* Responsive: Stack on small screens */
+@media (max-width: 1024px) {
+    .content-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .map-frame {
+        height: 60vh;
+        width: 100%;
+        flex: none;
+    }
+
+    .side-panel {
+        width: 100%;
+        max-width: none;
+        height: 400px;
+        flex: none;
+    }
+}
+
+/* Map Controls */
+/* Map Controls */
+/* Controls Wrapper */
+.controls-wrapper {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* 1. Map Controls (Buttons) - White Box */
+.map-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.7);
+    /* Opacity 0.7 */
+    padding: 12px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+}
+
+.controls-row {
+    display: none;
+    /* No longer needed as wrapper flex handles structure */
+}
+
+/* Remove old positioning from map-controls since wrapper handles it */
+
+.control-group {
+    display: flex;
+    gap: 8px;
+}
+
+.control-divider {
+    width: 1px;
+    height: 24px;
+    background-color: #e2e8f0;
+}
+
+.control-btn {
+    background: transparent;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #64748b;
+    box-shadow: none;
+}
+
+.control-btn:hover {
+    background-color: #f1f5f9;
+    color: #1a1a1a;
+    transform: translateY(-1px);
+}
+
+.control-btn.active {
+    background: #162233;
+    /* Dark Blue from markers */
+    color: white;
+    box-shadow: 0 2px 8px rgba(22, 34, 51, 0.3);
+}
+
+/* 2. Growth Controls (Inputs) - White Box, Bottom Left */
+.growth-controls {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    z-index: 20;
+
+    background: rgba(255, 255, 255, 0.7);
+    /* Opacity 0.7 */
+    padding: 16px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: fit-content;
+    min-width: 0;
+
+    /* Shake Animation every 5s */
+    animation: shake-box 5s cubic-bezier(.36, .07, .19, .97) infinite;
+    transform-origin: center;
+}
+
+.growth-header {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #64748b;
+    /* Slate text */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    text-align: center;
+    /* Center header too */
+}
+
+.growth-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Exact equal columns */
+    gap: 8px;
+    width: auto;
+    /* Hug content */
+}
+
+/* Custom Spinners Layout */
+.input-wrapper {
+    position: relative;
+    width: 115px;
+    /* Wrapper controls width */
+}
+
+/* Hide native spinners */
+.input-wrapper input[type=number]::-webkit-inner-spin-button,
+.input-wrapper input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input-wrapper input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.growth-row input {
+    width: 100%;
+    /* Fill wrapper */
+    padding: 8px 32px 8px 12px;
+    border: 1px solid #e2e8f0;
+    /* Gray border */
+    border-radius: 8px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #1e293b;
+    /* Dark text */
+    background: #ffffff;
+    /* White bg */
+    transition: all 0.2s;
+}
+
+.growth-row input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background: #ffffff;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.growth-row input::placeholder {
+    color: #94a3b8;
+    /* Muted placeholder */
+    font-size: 0.8rem;
+}
+
+/* Custom Spinner Buttons */
+.custom-spinners {
+    position: absolute;
+    right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    height: 100%;
+    justify-content: center;
+    padding: 2px 0;
+}
+
+.spin-btn {
+    width: 24px;
+    height: 14px;
+    background: transparent !important;
+    border: none !important;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    /* Muted arrow color */
+    box-shadow: none !important;
+}
+
+.spin-btn:hover {
+    background: transparent !important;
+    color: #000000;
+    /* Darker on hover */
+    transform: none !important;
+}
+
+.spin-btn svg {
+    display: block;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+#sky-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    pointer-events: none;
+    /* BUT better: use a CSS variable set by JS. */
+    z-index: 10;
+}
+
+.cloud-bubble:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px var(--hover-glow);
+    z-index: 10;
+}
+
+.cloud-label {
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cloud-label span:first-child {
+    font-size: 0.9rem;
+    /* Restored from 0.77rem */
+    font-weight: 800;
+    /* Thick white outline (reduced offset) */
+    text-shadow:
+        -1px -1px 0 #fff,
+        1px -1px 0 #fff,
+        -1px 1px 0 #fff,
+        1px 1px 0 #fff,
+        0px 0px 4px rgba(0, 0, 0, 0.2);
+}
+
+.cloud-sub {
+    font-size: 0.56rem;
+    /* Reduced from 0.8rem */
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+/* Modal Styling */
+/* Modal Styling - White Card Design */
+#modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    /* Lighter overlay */
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+#modal-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#project-modal {
+    background: #ffffff;
+    /* White background */
+    width: 90%;
+    max-width: 420px;
+    /* Slightly narrower like the card */
+    border-radius: 24px;
+    /* Rounded corners */
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transform: translateY(0);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-family: 'Outfit', sans-serif;
+    color: #1a1a1a;
+}
+
+#modal-overlay.hidden #project-modal {
+    transform: translateY(20px);
+}
+
+/* Close Button - Subtle transparent */
+#close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    color: #333;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#close-modal:hover {
+    transform: scale(1.1);
+    background: #fff;
+}
+
+#modal-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-image-container {
+    width: 100%;
+    height: 220px;
+    background: #f1f5f9;
+}
+
+.modal-details {
+    padding: 24px;
+}
+
+/* Header Section */
+#modal-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+}
+
+.area-tag {
+    display: inline-block;
+    color: #666;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+    background: transparent;
+    padding: 0;
+}
+
+/* Description Text */
+#modal-desc {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #444;
+    margin-bottom: 24px;
+    display: none;
+    /* Hide description to match minimal card style? Or keep? Let's hide for clean look, show only key data */
+}
+
+/* Stats Grid - Matching the reference layout */
+.modal-stats {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    /* Label Left, Value Right */
+    gap: 12px 20px;
+    padding-top: 10px;
+    margin-bottom: 24px;
+    border-top: none;
+}
+
+.stat-item {
+    display: contents;
+    /* Allows children to participate in grid */
+}
+
+.stat-item .label {
+    font-size: 0.95rem;
+    color: #888;
+    /* Light grey label */
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.stat-item .value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111;
+    /* Dark value */
+    text-align: right;
+}
+
+/* Action Buttons Container */
+#modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* Primary Button (Black Pill) */
+.finn-btn {
+    flex: 2;
+    background: #111;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 30px;
+    /* Pill shape */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-align: center;
+    transition: transform 0.2s, background 0.2s;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.finn-btn:hover {
+    background: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Secondary Button (White Outline) - we can inject this in JS or style a placeholder */
+.secondary-btn {
+    flex: 1;
+    background: white;
+    color: #111;
+    border: 1px solid #e5e5e5;
+    padding: 12px 20px;
+    border-radius: 30px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.2s;
+}
+
+.secondary-btn:hover {
+    background: #f9f9f9;
+    border-color: #d1d1d1;
+}
+
+/* Animations */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) translateX(0);
+    }
+
+    25% {
+        transform: translateY(-15px) translateX(5px);
+    }
+
+    50% {
+        transform: translateY(0) translateX(10px);
+    }
+
+    75% {
+        transform: translateY(15px) translateX(5px);
+    }
+}
+
+/* =========================================
+   CAR EFFECT STYLES
+   ========================================= */
+
+/* Money Container */
+#money-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+    /* Above clouds, below modal */
+    overflow: hidden;
+}
+
+.money {
+    position: absolute;
+    font-size: 32px;
+    animation: fall 2s linear forwards;
+    opacity: 1;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(300px) rotate(360deg) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* Car Rig - Blue Caricature Dimensions */
+#car-rig {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 280px;
+    /* Wider for 3 guys */
+    height: 200px;
+    z-index: 60;
+    pointer-events: none;
+    will-change: transform;
+    display: none;
+    /* User requested hidden */
+    /* display: flex; */
+    align-items: flex-end;
+}
+
+.car-body {
+    width: 280px;
+    height: auto;
+    position: relative;
+    z-index: 10;
+}
+
+.passengers {
+    display: none;
+    /* Faces are now built into the car image */
+}
+
+.face {
+    position: absolute;
+    /* Individual placement */
+    width: 55px;
+    /* Big caricature heads */
+    height: 65px;
+    /* Slightly oval for realism on cartoon bodies */
+    border-radius: 45%;
+    object-fit: cover;
+    border: 2px solid white;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 
+   Face 1: Left passenger (Suit) 
+   Face 2: Middle/Right (Suit - Driver?)
+   Face 3: Far Right (Polo)
+*/
+
+/* Let's assigning specific people to specific bodies */
+/* Torbjørn (Face 2): Driver? Espen (Face 3): Polo? Ali (Face 1): Passenger? */
+
+.face-1 {
+    /* Left - Suit */
+    left: 10px;
+    top: 20px;
+    transform: rotate(-5deg);
+    z-index: 2;
+}
+
+.face-2 {
+    /* Middle - Suit Driver */
+    left: 65px;
+    top: 20px;
+    transform: rotate(0deg);
+    z-index: 3;
+}
+
+.face-3 {
+    /* Right - Polo */
+    left: 120px;
+    top: 15px;
+    transform: rotate(5deg);
+    z-index: 1;
+}
+
+/* Banner */
+.banner {
+    position: absolute;
+    right: 90%;
+    top: -40px;
+    background: #fef08a;
+    /* Yellow banner */
+    color: #854d0e;
+    padding: 8px 16px;
+    font-weight: 800;
+    font-size: 1.2rem;
+    white-space: nowrap;
+    border: 3px solid #a16207;
+    border-radius: 4px;
+    margin-right: 50px;
+    transform-origin: right center;
+    animation: flap 0.3s ease-in-out infinite alternate;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+    /* Playful font */
+}
+
+.banner-string {
+    position: absolute;
+    right: 250px;
+    /* Attached to rear of car */
+    top: 60px;
+    width: 100px;
+    height: 2px;
+    background: #ccc;
+    transform: rotate(-10deg);
+    transform-origin: left center;
+}
+
+@keyframes flap {
+    0% {
+        transform: rotate(0deg) translateY(0);
+    }
+
+    100% {
+        transform: rotate(10deg) translateY(10px);
+    }
+}
+
+/* Direction Handling */
+.facing-left {
+    transform: scaleX(-1);
+}
+
+/* Un-mirror text when car is flipped */
+.facing-left .banner {
+    transform: scaleX(-1);
+    /* We keep the positioning relative to the car (right: 90%)
+       because flipping the parent already moved it to the correct "trailing" side.
+       We just need to flip the text back so it's readable.
+    */
+    animation: flap-left 0.3s ease-in-out infinite alternate;
+}
+
+/* Separate animation to match the flapping direction */
+@keyframes flap-left {
+    0% {
+        transform: scaleX(-1) rotate(0deg) translateY(0);
+    }
+
+    100% {
+        transform: scaleX(-1) rotate(10deg) translateY(10px);
+    }
+}
+
+/* Finn.no Button */
+.finn-btn {
+    display: inline-block;
+    background: #0063fb;
+    /* Finn.no blue */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.finn-btn:hover {
+    color: white;
+}
+
+/* Marker Container - Explicitly Sized */
+.marker-container {
+    background: transparent;
+    border: none;
+    /* Size is set by JS to match bubble */
+    overflow: visible;
+    pointer-events: auto;
+    display: block;
+    cursor: pointer;
+    /* Interaction Cue */
+}
+
+/* Cloud/Project Marker Styling - Split Design */
+.cloud-bubble {
+    pointer-events: auto;
+    position: relative;
+    width: auto;
+    min-width: 180px;
+    /* Wider to fit image + text */
+    max-width: 220px;
+    height: 60px;
+    /* Fixed height for consistency */
+
+    /* Card Decoration */
+    background: #ffffff;
+    border: none;
+    border-radius: 100px;
+    /* Pill shape like Google Maps reference */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+
+    /* Layout - Horizontal Row */
+    display: flex;
+    flex-direction: row;
+    /* Force Row */
+    align-items: stretch;
+    justify-content: flex-start;
+
+    padding: 0;
+    gap: 0;
+
+    /* Interactions */
+    font-family: 'Outfit', sans-serif;
+    user-select: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, z-index 0.5s;
+}
+
+/* Remove redundant bubble-row or just ensure it fills */
+.bubble-row {
+    display: contents;
+    /* Let children sit directly in grid/flex if needed, or just ignore */
+}
+
+.bubble-image {
+    width: 60px;
+    /* Square */
+    min-width: 60px;
+    height: 60px;
+    position: relative;
+    z-index: 1;
+}
+
+.bubble-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.bubble-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* Dark Header Section */
+.bubble-header {
+    background-color: #162233;
+    width: 100%;
+    padding: 0 12px;
+    /* Horizontal padding, vertical handled by flex alignment */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    /* Take half height roughly */
+    height: 50%;
+}
+
+/* White/Green Footer Section */
+.bubble-footer {
+    width: 100%;
+    padding: 0 12px;
+    background-color: #ffffff;
+    flex: 1;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    /* Center text vertically */
+}
+
+
+
+
+.cloud-bubble:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+
+
+.bubble-header h3 {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #ffffff;
+    /* White text */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bubble-header .meta {
+    font-size: 0.65rem;
+    color: #cbd5e1;
+    /* Light slate for dark bg */
+    font-weight: 500;
+    margin: 0;
+}
+
+/* White Footer Section */
+.bubble-footer {
+    width: 100%;
+    padding: 6px 12px;
+    background-color: #ffffff;
+}
+
+.bubble-footer .roi-label {
+    margin: 0;
+    font-weight: 800;
+    font-size: 0.85rem;
+    color: #4ecb8d;
+}
+
+/* High Return Variant (>= 15%) */
+.bubble-footer.high-return {
+    background-color: #16a34a;
+    /* Green 60 */
+}
+
+.bubble-footer.high-return .roi-label {
+    color: #ffffff;
+    /* White text */
+}
+
+
+
+
+
+
+/* Float Animation (Up/Down + Side/Side) */
+@keyframes logo-float {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    33% {
+        transform: translate(-10px, 15px);
+    }
+
+    66% {
+        transform: translate(5px, -8px);
+    }
+}
+
+/* Shake Animation (Occasional burst) */
+@keyframes logo-shake {
+
+    0%,
+    85% {
+        transform: rotate(0deg);
+    }
+
+    /* Idle for most of the loop */
+    86% {
+        transform: rotate(-5deg);
+    }
+
+    88% {
+        transform: rotate(5deg);
+    }
+
+    90% {
+        transform: rotate(-5deg);
+    }
+
+    92% {
+        transform: rotate(5deg);
+    }
+
+    94% {
+        transform: rotate(-3deg);
+    }
+
+    96% {
+        transform: rotate(3deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+/* Badges Common */
+/* Badges Common */
+.badge {
+    position: absolute;
+    color: white;
+    font-size: 0.7rem;
+    /* Restored from 0.56rem */
+    font-weight: 800;
+    padding: 3px 9px;
+    /* Reduced padding */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border: 1.5px solid white;
+    /* Thinner border */
+    z-index: 20;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border-radius: 9px;
+    /* Reduced radius */
+    white-space: nowrap;
+}
+
+/* Sold Out (Red) */
+.badge-sold {
+    top: -15px;
+    right: -25px;
+    background: #d83034;
+    transform: rotate(20deg);
+}
+
+/* Soon Sold Out (Orange) */
+.badge-soon {
+    top: -25px;
+    /* Float higher */
+    right: -10px;
+    background: #FF9800;
+    animation: badge-pulse 2s infinite ease-in-out;
+}
+
+/* Periodic Box Shake Animation */
+@keyframes shake-box {
+
+    0%,
+    90%,
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    91% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    92% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    93% {
+        transform: translate3d(-3px, 0, 0);
+    }
+
+    94% {
+        transform: translate3d(3px, 0, 0);
+    }
+
+    95% {
+        transform: translate3d(-3px, 0, 0);
+    }
+
+    96% {
+        transform: translate3d(3px, 0, 0);
+    }
+
+    97% {
+        transform: translate3d(-2px, 0, 0);
+    }
+
+    98% {
+        transform: translate3d(1px, 0, 0);
+    }
+}
+
+/* Mapbox Control Positioning Override */
+.mapboxgl-ctrl-top-right {
+    top: 24px !important;
+    right: 24px !important;
+}
