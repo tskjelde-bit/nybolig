@@ -392,9 +392,9 @@ body {
     }
 
     50% {
-        background-color: #3b82f6;
-        /* Solid FINN Blue */
-        box-shadow: 0 0 30px rgba(59, 130, 246, 0.8);
+        background-color: #162233;
+        /* Dark Blue as requested */
+        box-shadow: 0 0 30px rgba(22, 34, 51, 0.8);
         border-color: transparent;
         /* No border */
         transform: scale(1.05);

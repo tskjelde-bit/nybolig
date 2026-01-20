@@ -515,7 +515,7 @@ function generateStatsHTML(p, index = null) {
                 <span class="value">Q${completion.quarter} ${completion.year}</span>
             </div>
             <div class="stat-item" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; margin-top: 8px; grid-column: 1 / -1; display:flex; flex-direction: column; align-items: center; text-align: center;">
-                 <span class="label" style="color: white; font-weight: 700; text-transform: uppercase; font-size: 1.1rem;">Forventet avkastning</span>
+                 <span class="label" style="color: white; font-weight: 700; font-size: 1.1rem;">FORVENTET <span style="font-weight: 400; text-transform: none;">(netto)</span> AVKASTNING</span>
                  <span style="color: #94a3b8; font-size: 0.95rem; font-weight: 400; text-transform: none; margin-top: 4px;">(basert på <span style="color: #3b82f6; font-weight: 700;">${(growthData[completion.key] - 100).toFixed(1).replace('.', ',')}%</span> prisvekst)</span>
                  <span class="value" style="color: #4ecb8d; font-size: 1.6rem; margin-top: 8px; font-weight: 700;">+${formatCurrency(estimatedGain)} / ${roiPercentFormatted}%</span>
             </div>
