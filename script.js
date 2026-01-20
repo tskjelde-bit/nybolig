@@ -42,9 +42,11 @@ function setGrowthDisplay(id, val) {
     // Store numeric value for easy read
     el.dataset.value = rounded;
 
+    // Determine Color: Green (#16a34a) if >= 0, Red (#dc2626) if < 0
+    const valueColor = rounded >= 0 ? '#16a34a' : '#dc2626';
+
     // HTML with coloring
-    // Year: Dark (#1e293b), Value: Strong Green (#16a34a)
-    el.innerHTML = `<span style="color: #1e293b;">${year}:</span> <span style="color: #16a34a;">${sign}${rounded.toFixed(1)} %</span>`;
+    el.innerHTML = `<span style="color: #1e293b;">${year}:</span> <span style="color: ${valueColor};">${sign}${rounded.toFixed(1)} %</span>`;
 
     // Trigger update
     updateGrowthModel();
