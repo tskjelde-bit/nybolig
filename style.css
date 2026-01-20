@@ -50,8 +50,11 @@ body {
     /* Full width matching frame margins */
     /* Full width matching frame margins */
     max-width: 1100px;
-    height: 79px;
-    /* Updated to 79px */
+    height: 79px !important;
+    min-height: 79px !important;
+    max-height: 79px !important;
+    flex-shrink: 0;
+    /* Prevent shrinking */
     margin-top: 24px;
     border-radius: 16px;
     /* Rounded corners, not pill */
@@ -214,6 +217,9 @@ body {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    align-items: center;
+    /* Center horizontally */
+    text-align: center;
 }
 
 .side-panel-content .stat-item .label {
@@ -373,9 +379,33 @@ body {
     width: fit-content;
     min-width: 0;
 
-    /* Shake Animation every 5s */
-    animation: shake-box 5s cubic-bezier(.36, .07, .19, .97) infinite;
+    /* Pulsating Blue/White Animation */
+    animation: pulse-blue-white 3s infinite ease-in-out;
     transform-origin: center;
+}
+
+@keyframes pulse-blue-white {
+    0% {
+        background-color: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: scale(1);
+    }
+
+    50% {
+        background-color: #3b82f6;
+        /* Solid FINN Blue */
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.8);
+        border-color: transparent;
+        /* No border */
+        transform: scale(1.05);
+        /* Slight physical pulse */
+    }
+
+    100% {
+        background-color: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: scale(1);
+    }
 }
 
 .growth-header {
@@ -387,7 +417,22 @@ body {
     letter-spacing: 0.5px;
     margin-bottom: 4px;
     text-align: center;
-    /* Center header too */
+    /* Animation for text color sync */
+    animation: pulse-text-white 3s infinite ease-in-out;
+}
+
+@keyframes pulse-text-white {
+    0% {
+        color: #64748b;
+    }
+
+    50% {
+        color: #ffffff;
+    }
+
+    100% {
+        color: #64748b;
+    }
 }
 
 .growth-row {

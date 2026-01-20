@@ -490,7 +490,7 @@ function generateStatsHTML(p, index = null) {
 
     // Blue Button style
     const linkHTML = p.link ?
-        `<div style="grid-column: 1/-1; margin-top: 8px; text-align: right;">
+        `<div style="grid-column: 1/-1; margin-top: 8px; text-align: center;">
             <a href="${p.link}" target="_blank" style="background: #3b82f6; color: white; padding: 8px 16px; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: 600; font-size: 0.85rem; transition: background 0.2s;">Se annonse på FINN</a>
          </div>`
         : '';
@@ -498,25 +498,26 @@ function generateStatsHTML(p, index = null) {
     return `
         <div class="stat-group" style="${index > 0 ? 'margin-top: 24px; paddingTop: 16px;' : ''}">
             ${title}
-            <div class="stat-item">
+            <div class="stat-item" style="text-align: center;">
                 <span class="label">Antall solgte</span>
                 <span class="value">${sold} / ${units}</span>
             </div>
-            <div class="stat-item">
+            <div class="stat-item" style="text-align: center;">
                 <span class="label">Antall til salgs</span>
                 <span class="value">${forSale}</span>
             </div>
-            <div class="stat-item">
-                <span class="label">Pris fra</span>
+            <div class="stat-item" style="text-align: center;">
+                <span class="label">Snittpris</span>
                 <span class="value">${formatCurrency(avgPrice)}</span>
             </div>
-            <div class="stat-item">
+            <div class="stat-item" style="text-align: center;">
                 <span class="label">Ferdigstillelse</span>
                 <span class="value">Q${completion.quarter} ${completion.year}</span>
             </div>
-            <div class="stat-item" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; margin-top: 4px; grid-column: 1 / -1; display:flex; justify-content: space-between;">
-                 <span class="label" style="color: white; font-weight: 600;">Forventet avkastning</span>
-                 <span class="value" style="color: #4ecb8d; font-size: 1.1rem;">+${formatCurrency(estimatedGain)} / ${roiPercentFormatted}%</span>
+            <div class="stat-item" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; margin-top: 8px; grid-column: 1 / -1; display:flex; flex-direction: column; align-items: center; text-align: center;">
+                 <span class="label" style="color: white; font-weight: 700; text-transform: uppercase; font-size: 1.1rem;">Forventet avkastning</span>
+                 <span style="color: #94a3b8; font-size: 0.95rem; font-weight: 400; text-transform: none; margin-top: 4px;">(basert på <span style="color: #3b82f6; font-weight: 700;">${(growthData[completion.key] - 100).toFixed(1).replace('.', ',')}%</span> prisvekst)</span>
+                 <span class="value" style="color: #4ecb8d; font-size: 1.6rem; margin-top: 8px; font-weight: 700;">+${formatCurrency(estimatedGain)} / ${roiPercentFormatted}%</span>
             </div>
             ${linkHTML}
         </div>
