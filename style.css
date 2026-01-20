@@ -117,7 +117,7 @@ body {
     gap: 24px;
     width: calc(100% - 48px);
     max-width: 1600px;
-    height: calc(100vh - 120px);
+    height: calc(100vh - 155px);
     /* Fill remaining height roughly */
     margin: 24px;
     flex-grow: 1;
