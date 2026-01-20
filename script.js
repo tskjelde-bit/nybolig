@@ -128,7 +128,14 @@ const randomZones = [
     [10.76, 59.92], // Grünerløkka/Sagene (Central)
 ];
 
+const coordinateCache = {};
+
 function getCoordinates(name) {
+    // Return cached coordinates if available
+    if (coordinateCache[name]) {
+        return coordinateCache[name];
+    }
+
     let baseCoords = null;
 
     // 1. Try to find a specific match
@@ -151,7 +158,12 @@ function getCoordinates(name) {
     const spreadLng = (Math.random() - 0.5) * 0.06;
     const spreadLat = (Math.random() - 0.5) * 0.03;
 
-    return [baseCoords[0] + spreadLng, baseCoords[1] + spreadLat];
+    const finalCoords = [baseCoords[0] + spreadLng, baseCoords[1] + spreadLat];
+
+    // Cache the result
+    coordinateCache[name] = finalCoords;
+
+    return finalCoords;
 }
 
 function getFinnLink(name) {
