@@ -116,7 +116,7 @@
                 <div class="growth-row">
                     <!-- 2026 -->
                     <div class="input-wrapper">
-                        <input type="number" id="growth-2026" placeholder="2026: +8 %" step="0.5">
+                        <input type="number" id="growth-2026" placeholder="2026: +5.0 %" step="0.5">
                         <div class="custom-spinners">
                             <button class="spin-btn up" onclick="adjustInput('growth-2026', 0.5)">
                                 <svg width="8" height="5" viewBox="0 0 10 6" fill="none">
@@ -135,7 +135,7 @@
 
                     <!-- 2027 -->
                     <div class="input-wrapper">
-                        <input type="number" id="growth-2027" placeholder="2027: +12 %" step="0.5">
+                        <input type="number" id="growth-2027" placeholder="2027: +9.5 %" step="0.5">
                         <div class="custom-spinners">
                             <button class="spin-btn up" onclick="adjustInput('growth-2027', 0.5)">
                                 <svg width="8" height="5" viewBox="0 0 10 6" fill="none">
@@ -154,7 +154,7 @@
 
                     <!-- 2028 -->
                     <div class="input-wrapper">
-                        <input type="number" id="growth-2028" placeholder="2028: +12 %" step="0.5">
+                        <input type="number" id="growth-2028" placeholder="2028: +8.5 %" step="0.5">
                         <div class="custom-spinners">
                             <button class="spin-btn up" onclick="adjustInput('growth-2028', 0.5)">
                                 <svg width="8" height="5" viewBox="0 0 10 6" fill="none">
@@ -173,7 +173,7 @@
 
                     <!-- 2029 -->
                     <div class="input-wrapper">
-                        <input type="number" id="growth-2029" placeholder="2029: +5 %" step="0.5">
+                        <input type="number" id="growth-2029" placeholder="2029: +6.0 %" step="0.5">
                         <div class="custom-spinners">
                             <button class="spin-btn up" onclick="adjustInput('growth-2029', 0.5)">
                                 <svg width="8" height="5" viewBox="0 0 10 6" fill="none">
@@ -190,6 +190,14 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+
+            <div id="scenario-hint"
+                style="position: absolute; bottom: 100px; left: 350px; color: white; font-size: 0.9rem; max-width: 300px; line-height: 1.4; font-weight: 500; text-shadow: 0 2px 4px rgba(0,0,0,0.5); pointer-events: none; opacity: 0; animation: fadeIn 1s 1s ease-out forwards;">
+                <span style="font-size: 1.2rem; vertical-align: middle; margin-right: 8px;">&larr;</span> Endre anslag
+                for
+                utviklingen i boligprisene for å regne på forskjellige scenarier
             </div>
 
         </main>
@@ -236,7 +244,7 @@
         </div>
     </div>
 
-    <script type="module" src="script.js?v=142"></script>
+    <script type="module" src="script.js?v=155"></script>
 </body>
 
 </html>

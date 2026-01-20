@@ -170,8 +170,8 @@ function calculateQuarterlyIndices(startYear, startValue, annualRate) {
     const G = annualRate / 100;
     const L = Math.log(1 + G);
 
-    // 2. Weights: Q1: 45%, Q2: 27.5%, Q3: 12.5%, Q4: 15%
-    const weights = [0.45, 0.275, 0.125, 0.15];
+    // 2. Weights: Q1: 45%, Q2: 27.5%, Q3: 19.5%, Q4: 8% (Updated matches popup)
+    const weights = [0.45, 0.275, 0.195, 0.08];
 
     // 3. Calculate quarterly end values
     let currentVal = startValue;
@@ -195,7 +195,7 @@ function calculateQuarterlyIndices(startYear, startValue, annualRate) {
 
 function updateGrowthModel() {
     // Get inputs (or use placeholders as defaults)
-    const defs = { 2026: 8, 2027: 12, 2028: 12, 2029: 5 };
+    const defs = { 2026: 5.0, 2027: 9.5, 2028: 8.5, 2029: 6.0 };
     const rates = {};
 
     [2026, 2027, 2028, 2029].forEach(y => {
@@ -548,12 +548,70 @@ function generateStatsHTML(p, index = null) {
                      </div>
                  </div>
                  <span style="color: #94a3b8; font-size: 0.95rem; font-weight: 400; text-transform: none; margin-top: 4px;">(basert på <span style="color: #3b82f6; font-weight: 700;">${(growthData[completion.key] - 100).toFixed(1).replace('.', ',')}%</span> prisvekst)</span>
-                 <span class="value" style="color: #4ecb8d; font-size: 1.6rem; margin-top: 8px; font-weight: 700;">+${formatCurrency(estimatedGain)} / ${roiPercentFormatted}%</span>
+                 <span class="value" style="color: #4ecb8d; font-size: 1.6rem; margin-top: 8px; font-weight: 700;">+${formatCurrency(estimatedGain)} / ${roiPercentFormatted}% *</span>
+                 <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 4px; font-weight: 400;">* Beregnet på snittpris i prosjektet</div>
+                 
+                <div style="margin-top: 12px; position: static;">
+                    <a href="#" onclick="event.preventDefault(); window.openCalculationMethodModal();" style="color: rgba(255,255,255,0.6); font-size: 0.8rem; text-decoration: underline; cursor: pointer; display: block;">Hvordan er estimert prisvekst beregnet?</a>
+                </div>
+            </div>
             </div>
             ${linkHTML}
         </div>
     `;
 }
+
+// Make function globally available
+window.openCalculationMethodModal = function () {
+    // Check if already open
+    if (document.getElementById('viz-calc-modal')) return;
+
+    const modal = document.createElement('div');
+    modal.id = 'viz-calc-modal';
+    modal.style.cssText = "position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 99999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px); cursor: default; opacity: 0; transition: opacity 0.3s ease;";
+
+    modal.innerHTML = `
+        <div style="width: 600px; max-width: 90%; background: #ffffff; color: #162233; padding: 32px; border-radius: 16px; font-size: 0.95rem; text-align: left; box-shadow: 0 20px 60px rgba(0,0,0,0.6); position: relative; max-height: 90vh; overflow-y: auto; transform: scale(0.95); transition: transform 0.3s ease;">
+            <!-- Close Button -->
+            <div id="close-calc-modal" style="position: absolute; top: 16px; right: 16px; cursor: pointer; opacity: 0.6; padding: 8px; transition: opacity 0.2s;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+            </div>
+            
+            <!-- Content -->
+            <h4 style="margin: 0 0 20px 0; font-size: 1.4rem; color: #162233; font-weight: 700; padding-right: 32px;">ℹ️ Slik har jeg beregnet prognosene for Oslo</h4>
+            <p style="margin-bottom: 20px; font-size: 1.05rem; line-height: 1.6;">For å gi deg et mest mulig realistisk bilde av boligprisutviklingen i Oslo de neste årene, har jeg sammenstilt data fra flere ulike analysemiljøer. Siden ingen enkeltaktør har en fasit som strekker seg så langt frem i tid, har jeg laget et "konsensus-estimat" basert på følgende metode:</p>
+            <ul style="margin: 0 0 24px 0; padding-left: 24px; list-style-type: disc;">
+                <li style="margin-bottom: 16px; line-height: 1.6;"><strong>2026 (+5,0 %):</strong> Dette tallet er hentet direkte fra <strong>Eiendom Norge</strong> sin spesifikke prognose for Oslo. Tallet støttes av <strong>SSB</strong> og <strong>Prognosesenteret</strong>, som alle er enige om at det store tilbudet av bruktboliger (særlig tidligere utleieboliger) vil dempe prisveksten noe i år, til tross for reallønnsvekst.</li>
+                <li style="margin-bottom: 16px; line-height: 1.6;"><strong>2027 (+9,5 %) og 2028 (+8,5 %):</strong> Disse tallene er utledet fra <strong>Samfunnsøkonomisk Analyse (SØA)</strong> sin langtidsrapport. De spår en samlet prisvekst i Oslo på ca. 30 % i perioden 2025–2028. Når vi trekker fra veksten for 2025 og 2026, gjenstår en betydelig vekst som jeg har fordelt på 2027 og 2028. Det er i disse årene "nyboligtørken" i Oslo ventes å treffe markedet med full kraft, noe som presser prisene opp.</li>
+                <li style="margin-bottom: 0; line-height: 1.6;"><strong>2029 (+6,0 %):</strong> For dette året finnes det foreløpig ingen offisielle rapporter. Jeg har derfor lagt til grunn en <strong>kvalifisert gjetning</strong>. Antakelsen er at prispresset dempes noe sammenlignet med toppen i 2027/28, men at det store etterslepet på boligbygging vil holde veksten høyere enn normal prisstigning også i 2029.</li>
+            </ul>
+            <p style="margin: 0; color: #475569; font-size: 0.9rem; padding-top: 16px; border-top: 1px solid #e2e8f0;"><strong>Kilder benyttet:</strong> Statistisk sentralbyrå (SSB), Eiendom Norge, Samfunnsøkonomisk Analyse (SØA) og Prognosesenteret.</p>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    // Animation in
+    requestAnimationFrame(() => {
+        modal.style.opacity = '1';
+        modal.querySelector('div').style.transform = 'scale(1)';
+    });
+
+    // Close Handler
+    const close = () => {
+        modal.style.opacity = '0';
+        modal.querySelector('div').style.transform = 'scale(0.95)';
+        setTimeout(() => modal.remove(), 300);
+    };
+
+    modal.querySelector('#close-calc-modal').onclick = close;
+    modal.onclick = (e) => {
+        if (e.target === modal) close();
+    };
+};
 
 function openModal(project) {
     // Determine image path based on project name
@@ -588,7 +646,9 @@ function openModal(project) {
             <div class="side-panel-content">
                 <!-- <span class="area-tag">${project.area || "Oslo"}</span> -->
                 <h2>${project.name}</h2>
-                <img src="${imgSrc}" alt="${project.name}" onerror="this.onerror=null;this.src='${fallbackImg}';" />
+                <div class="side-image-wrapper">
+                    <img src="${imgSrc}" alt="${project.name}" onerror="this.onerror=null;this.src='${fallbackImg}';" />
+                </div>
 
                 <div class="modal-stats">
                     ${statsHTML}
