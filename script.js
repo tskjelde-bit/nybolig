@@ -114,7 +114,7 @@ const finnLinks = {
     "Ullernhøyden": "https://www.finn.no/realestate/project/ad.html?finnkode=409940269",
     "Ulvenplassen": "https://www.finn.no/realestate/project/ad.html?finnkode=389063569",
     "Vesteråsveien": "https://www.finn.no/realestate/project/ad.html?finnkode=412361233",
-    "Villa Silur": "https://www.finn.no/realestate/project/ad.html?finnkode=393490154"
+    "Villa Silur": "https://naabo.no/prosjekter/boliger-til-salgs/villa-silur/til-salgs"
 };
 
 // Zones for random placement (Residential areas in Oslo)
